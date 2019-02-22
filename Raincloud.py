@@ -8,6 +8,7 @@ screen = pygame.display.set_mode((640,480))
 pressed_key = pygame.key.get_pressed()
 
 cloud_image = pygame.image.load("cloud.jpg").convert()
+human_image = pygame.image.load("human.png").convert_alpha()
 
 # xpos = 5
 # ypos = 5
@@ -15,6 +16,7 @@ xpos = random.randint(0,640)
 ypos = random.randint(0,480)
 clock = pygame.time.Clock()
 rainList = []
+hxpos = 0
 
 class Raindrop:
 
@@ -38,9 +40,13 @@ while 1:
     clock.tick(60)
     screen.fill((88,78,76))
     screen.blit(cloud_image, (100,0))
+    screen.blit(human_image, (hxpos,433))
+    pressed_key = pygame.key.get_pressed()
 
-
-
+    if pressed_key[K_RIGHT] and hxpos <= 640:
+        hxpos += 2
+    if pressed_key[K_LEFT]and hxpos >= 0:
+        hxpos -= 2
     ## important##
 
     rainList.append(Raindrop())
