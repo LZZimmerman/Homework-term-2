@@ -12,8 +12,8 @@ human_image = pygame.image.load("human.png").convert_alpha()
 
 # xpos = 5
 # ypos = 5
-xpos = random.randint(0,640)
-ypos = random.randint(0,480)
+xpos = 0
+ypos = 0
 clock = pygame.time.Clock()
 rainList = []
 hxpos = 0
@@ -22,7 +22,7 @@ class Raindrop:
 
 
     def __init__(self):
-        self.x = random.randint(100,339)
+        self.x = random.randint(xpos,xpos+239)
         self.y = random.randint(211,212)
         self.speed = random.randint(3,8)
         self.size = random.randint(0,10)
@@ -39,7 +39,7 @@ class Raindrop:
 while 1:
     clock.tick(60)
     screen.fill((88,78,76))
-    screen.blit(cloud_image, (100,0))
+    screen.blit(cloud_image, (xpos,0))
     screen.blit(human_image, (hxpos,433))
     pressed_key = pygame.key.get_pressed()
 
@@ -48,6 +48,11 @@ while 1:
     if pressed_key[K_LEFT]and hxpos >= 0:
         hxpos -= 2
     ## important##
+
+    xpos+=1
+
+    if xpos > 640:
+        xpos = -239
 
     rainList.append(Raindrop())
     for i in rainList:
